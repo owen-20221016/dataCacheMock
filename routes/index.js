@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var SseChannel = require('sse-channel');
 var os = require('os');
+var getMethod = require('../src/getMethod.ts')
 
 var sysInfoChannel = new SseChannel({
   retryTimeout: 250,
@@ -13,13 +14,24 @@ var sysInfoChannel = new SseChannel({
   }
 });
 
-/* GET home page. */
-router.get('*', function(req, res, next) {
-  console.log(req, 'req')
-  // console.log(res, 'res')
-  // console.log(next, 'next')
+/* GET method */
+router.get('*', function (req, resp, next) {
+  getMethod(req, resp, next)
+});
 
-  // sysInfoChannel.addClient(req, res);
+/* POST method */
+router.post('*', function(req, resp, next) {
+  console.log('post method executed')
+});
+
+/* POST method */
+router.put('*', function(req, resp, next) {
+  console.log('post method executed')
+});
+
+/* DELETE method */
+router.put('*', function(req, resp, next) {
+  console.log('post method executed')
 });
 
 // var sysInfoCounter = 0;
